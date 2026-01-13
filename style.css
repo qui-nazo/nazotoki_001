@@ -330,6 +330,64 @@ button {
     display: none;
 }
 
+.start-screen {
+    text-align: center;
+    padding: 60px 40px;
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+.start-screen h2 {
+    font-size: 2.2em;
+    color: #667eea;
+    margin-bottom: 30px;
+}
+
+.instruction-box {
+    background: #f8f9fa;
+    border: 3px solid #dee2e6;
+    border-radius: 15px;
+    padding: 30px;
+    margin-bottom: 30px;
+    text-align: left;
+}
+
+.instruction-box h3 {
+    font-size: 1.5em;
+    color: #333;
+    margin-bottom: 15px;
+}
+
+.instruction-box p {
+    font-size: 1.1em;
+    line-height: 1.8;
+    color: #555;
+    margin-bottom: 15px;
+}
+
+.instruction-box p:last-child {
+    margin-bottom: 0;
+}
+
+.instruction-box .good-luck {
+    font-weight: bold;
+    color: #667eea;
+    margin-top: 20px;
+}
+
+.start-btn {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    font-size: 1.3em;
+    padding: 15px 60px;
+    min-width: 200px;
+}
+
+.start-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+}
+
 .complete-screen {
     text-align: center;
     padding: 60px 40px;

@@ -107,6 +107,9 @@ let currentPuzzle = null;
 let filledBlanks = {}; // {blankId: value}
 
 // DOM要素の取得
+const startScreen = document.getElementById('start-screen');
+const startBtn = document.getElementById('start-btn');
+const totalPuzzlesStart = document.getElementById('total-puzzles-start');
 const questionTitle = document.getElementById('question-title');
 const puzzleDisplay = document.getElementById('puzzle-display');
 const choicesContainer = document.getElementById('choices-container');
@@ -124,11 +127,21 @@ const completeScreen = document.getElementById('complete-screen');
 const clearTimeSpan = document.getElementById('clear-time');
 const restartBtn = document.getElementById('restart-btn');
 
-// 初期化
+// 初期化（開始画面を表示）
 function init() {
+    totalPuzzlesStart.textContent = puzzles.length;
+    totalPuzzlesSpan.textContent = puzzles.length;
+    startScreen.classList.remove('hidden');
+    gameScreen.classList.add('hidden');
+    completeScreen.classList.add('hidden');
+}
+
+// ゲーム開始
+function startGame() {
     startTime = Date.now();
     currentPuzzleIndex = 0;
-    totalPuzzlesSpan.textContent = puzzles.length;
+    startScreen.classList.add('hidden');
+    gameScreen.classList.remove('hidden');
     loadPuzzle();
 }
 
@@ -378,6 +391,7 @@ function restart() {
 }
 
 // イベントリスナーの設定
+startBtn.addEventListener('click', startGame);
 submitBtn.addEventListener('click', checkFinalAnswer);
 hintBtn.addEventListener('click', showHint);
 restartBtn.addEventListener('click', restart);
@@ -388,5 +402,5 @@ answerInput.addEventListener('keypress', (e) => {
     }
 });
 
-// ゲーム開始
+// ゲーム開始（開始画面を表示）
 init();
