@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>謎解きパズルゲーム</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🧩 謎解きパズルゲーム</h1>
+            <div class="progress">
+                <span id="current-puzzle">問題 1</span> / <span id="total-puzzles">5</span>
+            </div>
+        </header>
+
+        <main id="game-screen">
+            <div class="puzzle-container">
+                <div class="puzzle-question">
+                    <h2 id="question-title">問題を読み込み中...</h2>
+
+                    <!-- 謎解きの問題表示エリア（欠落部分を含む） -->
+                    <div id="puzzle-display" class="puzzle-display"></div>
+                </div>
+
+                <!-- 選択肢ボタンエリア -->
+                <div id="choices-container" class="choices-container"></div>
+
+                <div id="fill-feedback" class="fill-feedback hidden"></div>
+
+                <!-- 最終回答入力エリア -->
+                <div id="answer-section" class="answer-section hidden">
+                    <p class="answer-prompt">謎が解けましたか？答えを入力してください：</p>
+                    <div class="answer-input-group">
+                        <input type="text" id="answer-input" placeholder="答えを入力してください" autocomplete="off">
+                        <button id="submit-btn">回答する</button>
+                    </div>
+                    <button id="hint-btn">ヒント</button>
+                </div>
+
+                <div id="feedback" class="feedback hidden"></div>
+                <div id="hint-box" class="hint-box hidden"></div>
+            </div>
+        </main>
+
+        <div id="complete-screen" class="complete-screen hidden">
+            <h2>🎉 おめでとうございます！</h2>
+            <p>すべての謎を解きました！</p>
+            <p>クリア時間: <span id="clear-time"></span></p>
+            <button id="restart-btn">もう一度挑戦</button>
+        </div>
+
+        <footer>
+            <p>&copy; 2026 謎解きパズルゲーム</p>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
