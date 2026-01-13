@@ -20,7 +20,9 @@
             <div class="instruction-box">
                 <h3>遊び方：</h3>
                 <p>これから出題される謎解きは、一部が欠落した不完全な問題になっています。</p>
-                <p>そこに埋めるべきイラストをボタンで選んだ上で正しい答えを送信すると、正解となり次の問題に進むことができます。</p>
+                <p>まずは、欠けた部分にどのイラストが入れば問題が成立するかを考え、ボタンを押して選択してください。</p>
+                <p>問題が完成したら、実際にその答えを導いて入力しましょう。</p>
+                <p>問題の内容と答えの両方があっていたら、正解となり次の問題に進むことができます。</p>
                 <p>問題は全部で<span id="total-puzzles-start">5</span>問で、順番にすべて正解するとゲームクリアとなります。</p>
                 <p class="good-luck">それでは、頑張ってください！</p>
             </div>
@@ -43,10 +45,9 @@
 
                 <!-- 最終回答入力エリア -->
                 <div id="answer-section" class="answer-section hidden">
-                    <p class="answer-prompt">謎が解けましたか？答えを入力してください：</p>
                     <div class="answer-input-group">
                         <input type="text" id="answer-input" placeholder="答えを入力してください" autocomplete="off">
-                        <button id="submit-btn">回答する</button>
+                        <button id="submit-btn">回答</button>
                     </div>
                     <button id="hint-btn">ヒント</button>
                 </div>

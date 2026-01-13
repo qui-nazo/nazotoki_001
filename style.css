@@ -11,7 +11,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 20px;
+    padding: 10px;
 }
 
 .container {
@@ -26,7 +26,7 @@ body {
 header {
     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     color: white;
-    padding: 30px;
+    padding: 20px;
     text-align: center;
 }
 
@@ -41,7 +41,7 @@ header h1 {
 }
 
 main {
-    padding: 40px;
+    padding: 20px;
 }
 
 .puzzle-container {
@@ -72,8 +72,8 @@ main {
     background: #f8f9fa;
     border: 3px solid #dee2e6;
     border-radius: 15px;
-    padding: 30px;
-    margin: 20px 0;
+    padding: 15px;
+    margin: 15px 0;
     min-height: 200px;
     display: flex;
     flex-direction: column;
@@ -264,7 +264,8 @@ button {
 #submit-btn {
     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     color: white;
-    min-width: 200px;
+    min-width: 100px;
+    padding: 12px 20px;
 }
 
 #submit-btn:hover {
@@ -425,19 +426,84 @@ footer {
 }
 
 @media (max-width: 600px) {
+    body {
+        padding: 5px;
+    }
+
+    header {
+        padding: 15px 10px;
+    }
+
     header h1 {
-        font-size: 1.8em;
+        font-size: 1.5em;
+        margin-bottom: 5px;
+    }
+
+    .progress {
+        font-size: 1em;
     }
 
     main {
-        padding: 20px;
+        padding: 10px;
+    }
+
+    .puzzle-container {
+        gap: 15px;
     }
 
     .puzzle-question h2 {
-        font-size: 1.4em;
+        font-size: 1.2em;
+        margin-bottom: 10px;
     }
 
     .puzzle-question p {
+        font-size: 1em;
+    }
+
+    .puzzle-display {
+        padding: 10px;
+        margin: 10px 0;
+    }
+
+    .choices-container {
+        padding: 10px;
+        gap: 10px;
+    }
+
+    .choice-btn {
+        min-width: 80px;
+        min-height: 80px;
+        padding: 10px;
+    }
+
+    #answer-input {
+        font-size: 1em;
+        padding: 12px;
+    }
+
+    #submit-btn {
+        font-size: 1em;
+        padding: 12px 15px;
+        min-width: 80px;
+    }
+
+    .start-screen {
+        padding: 30px 20px;
+    }
+
+    .start-screen h2 {
+        font-size: 1.6em;
+    }
+
+    .instruction-box {
+        padding: 20px;
+    }
+
+    .instruction-box h3 {
+        font-size: 1.2em;
+    }
+
+    .instruction-box p {
         font-size: 1em;
     }
 }

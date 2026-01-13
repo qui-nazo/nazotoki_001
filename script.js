@@ -181,9 +181,10 @@ function renderPuzzle() {
         // 画像コンテナを作成（相対配置用）
         const imageContainer = document.createElement('div');
         imageContainer.style.position = 'relative';
-        imageContainer.style.width = currentPuzzle.imageWidth + 'px';
-        imageContainer.style.height = currentPuzzle.imageHeight + 'px';
+        imageContainer.style.width = '100%';
+        imageContainer.style.maxWidth = currentPuzzle.imageWidth + 'px';
         imageContainer.style.margin = '0 auto';
+        imageContainer.style.aspectRatio = currentPuzzle.imageWidth / currentPuzzle.imageHeight;
 
         // 問題画像
         const img = document.createElement('img');
@@ -196,7 +197,7 @@ function renderPuzzle() {
         img.style.display = 'block';
         imageContainer.appendChild(img);
 
-        // 空白を座標指定で配置
+        // 空白を座標指定で配置（パーセンテージで指定）
         currentPuzzle.puzzle.forEach(item => {
             if (item.type === 'blank' && item.x !== undefined && item.y !== undefined) {
                 const blank = document.createElement('div');
@@ -204,10 +205,11 @@ function renderPuzzle() {
                 blank.id = item.id;
                 blank.dataset.correctAnswer = item.correctAnswer;
                 blank.style.position = 'absolute';
-                blank.style.left = item.x + 'px';
-                blank.style.top = item.y + 'px';
-                blank.style.width = item.width + 'px';
-                blank.style.height = item.height + 'px';
+                // 元の画像サイズに対するパーセンテージで配置
+                blank.style.left = (item.x / currentPuzzle.imageWidth * 100) + '%';
+                blank.style.top = (item.y / currentPuzzle.imageHeight * 100) + '%';
+                blank.style.width = (item.width / currentPuzzle.imageWidth * 100) + '%';
+                blank.style.height = (item.height / currentPuzzle.imageHeight * 100) + '%';
                 imageContainer.appendChild(blank);
             }
         });
