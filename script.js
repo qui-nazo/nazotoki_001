@@ -560,6 +560,8 @@ function checkFinalAnswer() {
             currentPuzzleIndex++;
             submitBtn.disabled = false; // 次の問題でボタンを再度有効化
             loadPuzzle();
+            // ページトップまでスクロール
+            window.scrollTo({ top: 0, behavior: 'smooth' });
         }, 2000);
     } else {
         showFeedback('不正解', false);
