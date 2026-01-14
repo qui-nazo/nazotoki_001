@@ -11,7 +11,15 @@
         <header>
             <h1>🧩 穴埋めナゾトキ</h1>
             <div class="progress">
-                <span id="current-puzzle">問題 1</span> / <span id="total-puzzles">5</span>
+                <div id="progress-circles" class="progress-circles"></div>
+            </div>
+            <!-- テスト用: 問題ジャンプ機能 -->
+            <div id="puzzle-jump" class="puzzle-jump hidden">
+                <button class="jump-btn" data-puzzle="0">問題1</button>
+                <button class="jump-btn" data-puzzle="1">問題2</button>
+                <button class="jump-btn" data-puzzle="2">問題3</button>
+                <button class="jump-btn" data-puzzle="3">問題4</button>
+                <button class="jump-btn" data-puzzle="4">問題5</button>
             </div>
         </header>
 
@@ -50,6 +58,7 @@
                         <button id="submit-btn">回答</button>
                     </div>
                     <button id="hint-btn">ヒント</button>
+                    <div id="extra-choice-container" class="extra-choice-container hidden"></div>
                 </div>
 
                 <div id="feedback" class="feedback hidden"></div>

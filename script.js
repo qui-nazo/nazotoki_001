@@ -1,3 +1,8 @@
+// ============================================
+// テスト用設定: 問題ジャンプ機能のオンオフ
+// ============================================
+const ENABLE_PUZZLE_JUMP = true; // true: ジャンプ機能を有効化 / false: 無効化
+
 // 謎解きパズルのデータ
 const puzzles = [
     {
@@ -19,26 +24,67 @@ const puzzles = [
         hint: "たぬきは「た」抜き。答えが4文字になるには、「た」の他にどんな文字がなくなればよいか考えてみよう。"
     },
     {
-        title: "問題2: 動物の謎",
-        // image: 'images/puzzle2.png',
+        title: "問題2",
+        image: 'images/Q2.jpg',
+        imageWidth: 500,
+        imageHeight: 500,
         puzzle: [
-            {type: 'blank', id: 'blank1', correctAnswer: '🐱'},
-            {type: 'text', content: '+'},
-            {type: 'blank', id: 'blank2', correctAnswer: '🐶'},
-            {type: 'text', content: '='},
-            {type: 'text', content: 'ペット'}
+            {type: 'blank', id: 'blank1', correctAnswer: '=', x: 152, y: 112, width: 100, height: 100}
         ],
         choices: [
-            {id: 'choice1', display: '🐱', value: '🐱', targetBlank: 'blank1'},
-            {id: 'choice2', display: '🐶', value: '🐶', targetBlank: 'blank2'},
-            {id: 'choice3', display: '🐘', value: '🐘', targetBlank: 'blank1'},
-            {id: 'choice4', display: '🦁', value: '🦁', targetBlank: 'blank2'}
+            {id: 'choice1', display: '=', value: '=', targetBlank: 'blank1', image: 'images/Q2_equal.jpg'},
+            {id: 'choice2', display: '≠', value: '≠', targetBlank: 'blank1', image: 'images/Q2_notequal.jpg'},
+            {id: 'choice3', display: '>', value: '>', targetBlank: 'blank1', image: 'images/Q2_dainari.jpg'},
+            {id: 'choice4', display: '<', value: '<', targetBlank: 'blank1', image: 'images/Q2_shonari.jpg'}
         ],
-        finalAnswer: ["ペット", "ぺっと", "pet"],
-        hint: "家で飼える代表的な動物2種類を考えてみましょう"
+        finalAnswer: ["すわん", "スワン"],
+        hint: "選んだ記号をカタカナ3文字で読むとどうなるでしょうか？"
     },
     {
-        title: "問題3: 色の謎",
+        title: "問題3",
+        image: 'images/Q3.jpg',
+        imageWidth: 500,
+        imageHeight: 500,
+        sequentialFill: true, // 順番に埋める特殊モード
+        puzzle: [
+            {type: 'blank', id: 'blank1', correctAnswer: 'かん', label: '1', x: 45, y: 150, width: 90, height: 90},
+            {type: 'blank', id: 'blank2', correctAnswer: 'ほし', label: '2', x: 150, y: 150, width: 90, height: 90},
+            {type: 'blank', id: 'blank3', correctAnswer: 'はえ', label: '3', x: 255, y: 150, width: 90, height: 90},
+            {type: 'blank', id: 'blank4', correctAnswer: 'たこ', label: '4', x: 360, y: 150, width: 90, height: 90}
+        ],
+        choices: [
+            {id: 'choice1', display: 'はえ', value: 'はえ', image: 'images/Q3_hae.png'},
+            {id: 'choice2', display: 'ほし', value: 'ほし', image: 'images/Q3_hoshi.png'},
+            {id: 'choice3', display: 'かん', value: 'かん', image: 'images/Q3_kan.png'},
+            {id: 'choice4', display: 'たこ', value: 'たこ', image: 'images/Q3_tako.png'}
+        ],
+        finalAnswer: ["しほんか", "シホンカ", "資本家"],
+        hint: "イラストをカタカナで読んでみましょう。そして、それぞれ1文字目だけを順番に読むと..."
+    },
+    {
+        title: "問題4",
+        image: 'images/Q4.jpg',
+        imageWidth: 500,
+        imageHeight: 500,
+        sequentialFill: true, // 順番に埋める特殊モード
+        showExtraChoice: true, // 「あきらめる」ボタンを表示
+        puzzle: [
+            {type: 'blank', id: 'blank1', correctAnswer: 'しんかろん', label: '1', x: 190, y: 185, width: 210, height: 65},
+            {type: 'blank', id: 'blank2', correctAnswer: 'さらやしき', label: '2', x: 190, y: 297, width: 210, height: 65},
+            {type: 'blank', id: 'blank3', correctAnswer: 'あきらめる', label: '3', x: 190, y: 409, width: 210, height: 65}
+        ],
+        choices: [
+            {id: 'choice1', display: 'インディゴ', value: 'インディゴ'},
+            {id: 'choice2', display: 'しんかろん', value: 'しんかろん'},
+            {id: 'choice3', display: 'コンサート', value: 'コンサート'},
+            {id: 'choice4', display: 'さらやしき', value: 'さらやしき'}
+        ],
+        extraChoice: {id: 'choice5', display: 'あきらめる', value: 'あきらめる'},
+        finalAnswer: ["きゃらめる", "キャラメル"],
+        hint: "それぞれの言葉の最初の2文字を順番に読むと..."
+    },
+    {
+        title: "問題5: 色の謎",
         // image: 'images/puzzle3.png',
         puzzle: [
             {type: 'blank', id: 'blank1', correctAnswer: '赤'},
@@ -105,6 +151,7 @@ let currentPuzzleIndex = 0;
 let startTime = null;
 let currentPuzzle = null;
 let filledBlanks = {}; // {blankId: value}
+let selectionOrder = []; // 順番選択モード用: [{choiceId, value, image}]
 
 // DOM要素の取得
 const startScreen = document.getElementById('start-screen');
@@ -118,22 +165,56 @@ const answerSection = document.getElementById('answer-section');
 const answerInput = document.getElementById('answer-input');
 const submitBtn = document.getElementById('submit-btn');
 const hintBtn = document.getElementById('hint-btn');
+const extraChoiceContainer = document.getElementById('extra-choice-container');
 const feedback = document.getElementById('feedback');
 const hintBox = document.getElementById('hint-box');
-const currentPuzzleSpan = document.getElementById('current-puzzle');
-const totalPuzzlesSpan = document.getElementById('total-puzzles');
+const progressCircles = document.getElementById('progress-circles');
 const gameScreen = document.getElementById('game-screen');
 const completeScreen = document.getElementById('complete-screen');
 const clearTimeSpan = document.getElementById('clear-time');
 const restartBtn = document.getElementById('restart-btn');
+const puzzleJump = document.getElementById('puzzle-jump');
+
+// プログレスサークルの作成
+function createProgressCircles() {
+    progressCircles.innerHTML = '';
+    for (let i = 0; i < puzzles.length; i++) {
+        const circle = document.createElement('div');
+        circle.className = 'progress-circle unchallenged';
+        circle.dataset.index = i;
+        progressCircles.appendChild(circle);
+    }
+}
+
+// プログレスサークルの更新
+function updateProgressCircles() {
+    const circles = progressCircles.querySelectorAll('.progress-circle');
+    circles.forEach((circle, index) => {
+        circle.className = 'progress-circle';
+        if (index < currentPuzzleIndex) {
+            circle.classList.add('completed');
+        } else if (index === currentPuzzleIndex) {
+            circle.classList.add('current');
+        } else {
+            circle.classList.add('unchallenged');
+        }
+    });
+}
 
 // 初期化（開始画面を表示）
 function init() {
     totalPuzzlesStart.textContent = puzzles.length;
-    totalPuzzlesSpan.textContent = puzzles.length;
+    createProgressCircles();
     startScreen.classList.remove('hidden');
     gameScreen.classList.add('hidden');
     completeScreen.classList.add('hidden');
+
+    // テスト用: ジャンプ機能の表示制御
+    if (ENABLE_PUZZLE_JUMP) {
+        puzzleJump.classList.add('hidden'); // 初期状態では非表示
+    } else {
+        puzzleJump.classList.add('hidden');
+    }
 }
 
 // ゲーム開始
@@ -142,6 +223,12 @@ function startGame() {
     currentPuzzleIndex = 0;
     startScreen.classList.add('hidden');
     gameScreen.classList.remove('hidden');
+
+    // テスト用: ジャンプ機能の表示
+    if (ENABLE_PUZZLE_JUMP) {
+        puzzleJump.classList.remove('hidden');
+    }
+
     loadPuzzle();
 }
 
@@ -154,9 +241,10 @@ function loadPuzzle() {
 
     currentPuzzle = puzzles[currentPuzzleIndex];
     filledBlanks = {};
+    selectionOrder = [];
 
     questionTitle.textContent = currentPuzzle.title;
-    currentPuzzleSpan.textContent = `問題 ${currentPuzzleIndex + 1}`;
+    updateProgressCircles();
 
     // パズル表示エリアの構築
     renderPuzzle();
@@ -210,6 +298,15 @@ function renderPuzzle() {
                 blank.style.top = (item.y / currentPuzzle.imageHeight * 100) + '%';
                 blank.style.width = (item.width / currentPuzzle.imageWidth * 100) + '%';
                 blank.style.height = (item.height / currentPuzzle.imageHeight * 100) + '%';
+
+                // ラベル（番号）がある場合は表示
+                if (item.label) {
+                    const label = document.createElement('span');
+                    label.className = 'blank-label';
+                    label.textContent = item.label;
+                    blank.appendChild(label);
+                }
+
                 imageContainer.appendChild(blank);
             }
         });
@@ -256,10 +353,15 @@ function renderPuzzle() {
 // 選択肢ボタンの描画
 function renderChoices() {
     choicesContainer.innerHTML = '';
+    extraChoiceContainer.innerHTML = '';
 
     currentPuzzle.choices.forEach(choice => {
         const btn = document.createElement('button');
         btn.className = 'choice-btn';
+        // 4問目の場合はcompactクラスを追加
+        if (currentPuzzleIndex === 3) {
+            btn.classList.add('compact');
+        }
         btn.dataset.choiceId = choice.id;
         btn.dataset.value = choice.value;
         btn.dataset.targetBlank = choice.targetBlank;
@@ -282,49 +384,149 @@ function renderChoices() {
 
         choicesContainer.appendChild(btn);
     });
+
+    // extraChoiceがある場合は「あきらめる」ボタンを表示
+    if (currentPuzzle.showExtraChoice && currentPuzzle.extraChoice) {
+        extraChoiceContainer.classList.remove('hidden');
+
+        const extraBtn = document.createElement('button');
+        extraBtn.className = 'choice-btn extra-choice-btn';
+        // 4問目の場合はcompactクラスを追加
+        if (currentPuzzleIndex === 3) {
+            extraBtn.classList.add('compact');
+        }
+        extraBtn.dataset.choiceId = currentPuzzle.extraChoice.id;
+        extraBtn.dataset.value = currentPuzzle.extraChoice.value;
+
+        const display = document.createElement('div');
+        display.textContent = currentPuzzle.extraChoice.display;
+        extraBtn.appendChild(display);
+
+        extraBtn.addEventListener('click', () => handleChoiceClick(currentPuzzle.extraChoice, extraBtn));
+
+        extraChoiceContainer.appendChild(extraBtn);
+    } else {
+        extraChoiceContainer.classList.add('hidden');
+    }
 }
 
 // 選択肢クリック処理
 function handleChoiceClick(choice, btnElement) {
-    const targetBlank = document.getElementById(choice.targetBlank);
+    // 順番選択モード
+    if (currentPuzzle.sequentialFill) {
+        // 既に選択されている場合はキャンセル
+        if (btnElement.classList.contains('selected')) {
+            // 選択を解除
+            btnElement.classList.remove('selected');
 
-    // 既に選択されている場合はキャンセル
-    if (btnElement.classList.contains('selected')) {
-        targetBlank.innerHTML = '';
-        targetBlank.classList.remove('filled');
-        btnElement.classList.remove('selected');
-        delete filledBlanks[choice.targetBlank];
-        return;
-    }
+            // selectionOrderから削除
+            const index = selectionOrder.findIndex(item => item.choiceId === choice.id);
+            if (index !== -1) {
+                selectionOrder.splice(index, 1);
+            }
 
-    // 他のボタンの選択を解除
-    const allButtons = choicesContainer.querySelectorAll('.choice-btn');
-    allButtons.forEach(btn => {
-        if (btn.dataset.targetBlank === choice.targetBlank) {
-            btn.classList.remove('selected');
+            // すべての空欄を再描画
+            redistributeBlanks();
+            return;
         }
+
+        // 新規選択
+        btnElement.classList.add('selected');
+        selectionOrder.push({
+            choiceId: choice.id,
+            value: choice.value,
+            image: choice.image
+        });
+
+        // すべての空欄を再描画
+        redistributeBlanks();
+    }
+    // 通常モード
+    else {
+        const targetBlank = document.getElementById(choice.targetBlank);
+
+        // 既に選択されている場合はキャンセル
+        if (btnElement.classList.contains('selected')) {
+            targetBlank.innerHTML = '';
+            targetBlank.classList.remove('filled');
+            btnElement.classList.remove('selected');
+            delete filledBlanks[choice.targetBlank];
+            return;
+        }
+
+        // 他のボタンの選択を解除
+        const allButtons = choicesContainer.querySelectorAll('.choice-btn');
+        allButtons.forEach(btn => {
+            if (btn.dataset.targetBlank === choice.targetBlank) {
+                btn.classList.remove('selected');
+            }
+        });
+
+        // 空白に値を埋める（画像がある場合は画像、なければテキスト）
+        targetBlank.innerHTML = ''; // 既存の内容をクリア
+
+        if (choice.image) {
+            const img = document.createElement('img');
+            img.src = choice.image;
+            img.alt = choice.display;
+            img.style.maxWidth = '100%';
+            img.style.maxHeight = '100%';
+            img.style.objectFit = 'contain';
+            targetBlank.appendChild(img);
+        } else {
+            targetBlank.textContent = choice.value;
+        }
+
+        targetBlank.classList.add('filled');
+        filledBlanks[choice.targetBlank] = choice.value;
+
+        // ボタンを選択状態に
+        btnElement.classList.add('selected');
+    }
+}
+
+// 順番選択モード: 空欄を再配置する
+function redistributeBlanks() {
+    const blanks = currentPuzzle.puzzle.filter(item => item.type === 'blank');
+
+    // すべての空欄をクリア
+    blanks.forEach(blank => {
+        const blankEl = document.getElementById(blank.id);
+        // ラベルを保持しながらクリア
+        const label = blankEl.querySelector('.blank-label');
+        blankEl.innerHTML = '';
+        if (label) {
+            blankEl.appendChild(label.cloneNode(true));
+        }
+        blankEl.classList.remove('filled');
     });
 
-    // 空白に値を埋める（画像がある場合は画像、なければテキスト）
-    targetBlank.innerHTML = ''; // 既存の内容をクリア
+    // filledBlanksをクリア
+    filledBlanks = {};
 
-    if (choice.image) {
-        const img = document.createElement('img');
-        img.src = choice.image;
-        img.alt = choice.display;
-        img.style.maxWidth = '100%';
-        img.style.maxHeight = '100%';
-        img.style.objectFit = 'contain';
-        targetBlank.appendChild(img);
-    } else {
-        targetBlank.textContent = choice.value;
-    }
+    // 選択順に空欄に配置
+    selectionOrder.forEach((item, index) => {
+        if (index < blanks.length) {
+            const blank = blanks[index];
+            const blankEl = document.getElementById(blank.id);
 
-    targetBlank.classList.add('filled');
-    filledBlanks[choice.targetBlank] = choice.value;
+            if (item.image) {
+                const img = document.createElement('img');
+                img.src = item.image;
+                img.alt = item.value;
+                img.style.maxWidth = '100%';
+                img.style.maxHeight = '100%';
+                img.style.objectFit = 'contain';
+                blankEl.appendChild(img);
+            } else {
+                const textNode = document.createTextNode(item.value);
+                blankEl.appendChild(textNode);
+            }
 
-    // ボタンを選択状態に
-    btnElement.classList.add('selected');
+            blankEl.classList.add('filled');
+            filledBlanks[blank.id] = item.value;
+        }
+    });
 }
 
 // 最終回答のチェック
@@ -350,8 +552,13 @@ function checkFinalAnswer() {
     // 両方が正しい場合のみ正解
     if (allBlanksCorrect && isAnswerCorrect) {
         showFeedback('正解です！次の問題へ進みます', true);
+
+        // ボタンを無効化して複数回クリックを防ぐ
+        submitBtn.disabled = true;
+
         setTimeout(() => {
             currentPuzzleIndex++;
+            submitBtn.disabled = false; // 次の問題でボタンを再度有効化
             loadPuzzle();
         }, 2000);
     } else {
@@ -403,6 +610,20 @@ answerInput.addEventListener('keypress', (e) => {
         checkFinalAnswer();
     }
 });
+
+// テスト用: 問題ジャンプ機能のイベントリスナー
+if (ENABLE_PUZZLE_JUMP) {
+    const jumpButtons = document.querySelectorAll('.jump-btn');
+    jumpButtons.forEach(btn => {
+        btn.addEventListener('click', () => {
+            const puzzleIndex = parseInt(btn.dataset.puzzle);
+            if (puzzleIndex >= 0 && puzzleIndex < puzzles.length) {
+                currentPuzzleIndex = puzzleIndex;
+                loadPuzzle();
+            }
+        });
+    });
+}
 
 // ゲーム開始（開始画面を表示）
 init();

@@ -38,6 +38,63 @@ header h1 {
 .progress {
     font-size: 1.2em;
     opacity: 0.9;
+    margin-top: 15px;
+}
+
+.progress-circles {
+    display: flex;
+    gap: 18px;
+    justify-content: center;
+    align-items: center;
+}
+
+.progress-circle {
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    border: 2px solid rgba(255, 255, 255, 0.8);
+    transition: all 0.3s ease;
+}
+
+.progress-circle.completed {
+    background: #999;
+    border-color: #999;
+}
+
+.progress-circle.current {
+    background: #87ceeb;
+    border-color: #87ceeb;
+    transform: scale(1.2);
+}
+
+.progress-circle.unchallenged {
+    background: white;
+    border-color: rgba(255, 255, 255, 0.8);
+}
+
+/* テスト用: 問題ジャンプ機能 */
+.puzzle-jump {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    margin-top: 15px;
+    flex-wrap: wrap;
+}
+
+.jump-btn {
+    background: rgba(255, 255, 255, 0.3);
+    color: white;
+    border: 2px solid rgba(255, 255, 255, 0.5);
+    padding: 8px 16px;
+    font-size: 0.9em;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.jump-btn:hover {
+    background: rgba(255, 255, 255, 0.5);
+    transform: translateY(-2px);
 }
 
 main {
@@ -69,7 +126,7 @@ main {
 
 /* 謎解き問題表示エリア */
 .puzzle-display {
-    background: #f8f9fa;
+    background: #ffffff;
     border: 3px solid #dee2e6;
     border-radius: 15px;
     padding: 15px;
@@ -116,6 +173,25 @@ main {
 .puzzle-blank.positioned-blank {
     background: rgba(255, 255, 255, 0.9);
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    font-size: 0.8em; /* 空欄内のテキストサイズ */
+}
+
+/* 空欄内のラベル（番号） */
+.blank-label {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 0.4em;
+    color: #999;
+    font-weight: normal;
+    pointer-events: none;
+    z-index: 1;
+}
+
+/* イラスト配置時は数字を非表示 */
+.puzzle-blank.filled .blank-label {
+    display: none;
 }
 
 .puzzle-blank.filled {
@@ -155,7 +231,7 @@ main {
     min-width: 100px;
     min-height: 100px;
     padding: 20px;
-    background: white;
+    background: #f0f0f0;
     border: 3px solid #dee2e6;
     border-radius: 15px;
     cursor: pointer;
@@ -236,6 +312,23 @@ main {
     align-items: center;
 }
 
+/* 追加の選択肢コンテナ（あきらめるボタン用） */
+.extra-choice-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+}
+
+.extra-choice-btn {
+    min-width: 150px;
+}
+
+/* 4問目専用: 選択肢ボタンの高さを60%に */
+.choice-btn.compact {
+    min-height: 30px;
+    padding: 8px 20px; /* 縦方向のパディングを縮小 */
+}
+
 #answer-input {
     width: 100%;
     max-width: 400px;
@@ -276,6 +369,8 @@ button {
 #hint-btn {
     background: #f0f0f0;
     color: #666;
+    min-width: 166px;
+    font-size: 1.5em;
 }
 
 #hint-btn:hover {
