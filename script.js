@@ -126,7 +126,7 @@ const startScreen = document.getElementById('start-screen');
 const startBtn = document.getElementById('start-btn');
 const totalPuzzlesStart = document.getElementById('total-puzzles-start');
 const questionTitle = document.getElementById('question-title');
-const puzzleDisplay = document.getElementById('puzzle-display');
+let puzzleDisplay = document.getElementById('puzzle-display');
 const choicesContainer = document.getElementById('choices-container');
 const fillFeedback = document.getElementById('fill-feedback');
 const answerSection = document.getElementById('answer-section');
@@ -231,6 +231,15 @@ function loadPuzzle() {
 // パズルの描画
 function renderPuzzle() {
     puzzleDisplay.innerHTML = '';
+
+    // 前の問題で追加されたクラスとスタイルをクリア
+    puzzleDisplay.classList.remove('image-as-choice', 'image-selected');
+    puzzleDisplay.style.cursor = '';
+
+    // 既存のクリックイベントを削除するため、要素を複製して置き換え
+    const newPuzzleDisplay = puzzleDisplay.cloneNode(false);
+    puzzleDisplay.parentNode.replaceChild(newPuzzleDisplay, puzzleDisplay);
+    puzzleDisplay = newPuzzleDisplay;
 
     // 座標指定の場合（imageWidth/imageHeightがある場合）
     if (currentPuzzle.image && currentPuzzle.imageWidth && currentPuzzle.imageHeight) {
