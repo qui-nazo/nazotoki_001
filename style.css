@@ -204,6 +204,22 @@ main {
     background: rgba(232, 237, 249, 0.95);
 }
 
+/* 5問目専用: 問題画像を選択肢として選べる */
+.image-as-choice {
+    background: #f0f0f0;
+    border-radius: 15px;
+    padding: 10px;
+    transition: all 0.3s ease;
+}
+
+.image-as-choice:hover {
+    box-shadow: 0 0 15px rgba(102, 126, 234, 0.5);
+}
+
+.image-as-choice.image-selected {
+    box-shadow: 0 0 0 4px #667eea;
+}
+
 @keyframes fillIn {
     0% {
         transform: scale(0.8);

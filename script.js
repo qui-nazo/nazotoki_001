@@ -84,65 +84,33 @@ const puzzles = [
         hint: "それぞれの言葉の最初の2文字を順番に読むと..."
     },
     {
-        title: "問題5: 色の謎",
-        // image: 'images/puzzle3.png',
+        title: "問題5",
+        image: 'images/Q5.jpg',
+        imageWidth: 500,
+        imageHeight: 500,
+        imageAsChoice: true, // 問題画像自体も選択肢として選べる
         puzzle: [
-            {type: 'blank', id: 'blank1', correctAnswer: '赤'},
-            {type: 'text', content: '+'},
-            {type: 'blank', id: 'blank2', correctAnswer: '青'},
-            {type: 'text', content: '='},
-            {type: 'text', content: '?'}
+            {type: 'blank', id: 'blank1', correctAnswer: 'なぞ', x: 150, y: 150, width: 200, height: 200}
         ],
         choices: [
-            {id: 'choice1', display: '赤', value: '赤', targetBlank: 'blank1'},
-            {id: 'choice2', display: '青', value: '青', targetBlank: 'blank2'},
-            {id: 'choice3', display: '黄', value: '黄', targetBlank: 'blank1'},
-            {id: 'choice4', display: '緑', value: '緑', targetBlank: 'blank2'}
+            // 問題1の選択肢
+            {id: 'choice1', display: 'けん玉', value: 'けん玉', targetBlank: 'blank1', image: 'images/Q1_kendama.png'},
+            {id: 'choice2', display: '鳥居', value: '鳥居', targetBlank: 'blank1', image: 'images/Q1_torii.png'},
+            {id: 'choice3', display: '電車', value: '電車', targetBlank: 'blank1', image: 'images/Q1_densha.png'},
+            {id: 'choice4', display: 'ピアノ', value: 'ピアノ', targetBlank: 'blank1', image: 'images/Q1_piano.png'},
+            // 問題2の選択肢
+            {id: 'choice5', display: '=', value: '=', targetBlank: 'blank1', image: 'images/Q2_equal.jpg'},
+            {id: 'choice6', display: '≠', value: '≠', targetBlank: 'blank1', image: 'images/Q2_notequal.jpg'},
+            {id: 'choice7', display: '>', value: '>', targetBlank: 'blank1', image: 'images/Q2_dainari.jpg'},
+            {id: 'choice8', display: '<', value: '<', targetBlank: 'blank1', image: 'images/Q2_shonari.jpg'},
+            // 問題3の選択肢
+            {id: 'choice9', display: 'はえ', value: 'はえ', targetBlank: 'blank1', image: 'images/Q3_hae.png'},
+            {id: 'choice10', display: 'ほし', value: 'ほし', targetBlank: 'blank1', image: 'images/Q3_hoshi.png'},
+            {id: 'choice11', display: 'かん', value: 'かん', targetBlank: 'blank1', image: 'images/Q3_kan.png'},
+            {id: 'choice12', display: 'たこ', value: 'たこ', targetBlank: 'blank1', image: 'images/Q3_tako.png'}
         ],
-        finalAnswer: ["紫", "むらさき", "パープル"],
-        hint: "色を混ぜると何色になるでしょうか？"
-    },
-    {
-        title: "問題4: 曜日の謎",
-        // image: 'images/puzzle4.png',
-        puzzle: [
-            {type: 'text', content: '月'},
-            {type: 'text', content: '→'},
-            {type: 'blank', id: 'blank1', correctAnswer: '火'},
-            {type: 'text', content: '→'},
-            {type: 'text', content: '水'},
-            {type: 'text', content: '→'},
-            {type: 'blank', id: 'blank2', correctAnswer: '木'}
-        ],
-        choices: [
-            {id: 'choice1', display: '火', value: '火', targetBlank: 'blank1'},
-            {id: 'choice2', display: '木', value: '木', targetBlank: 'blank2'},
-            {id: 'choice3', display: '金', value: '金', targetBlank: 'blank1'},
-            {id: 'choice4', display: '土', value: '土', targetBlank: 'blank2'}
-        ],
-        finalAnswer: ["曜日", "ようび"],
-        hint: "月曜日、火曜日、水曜日..."
-    },
-    {
-        title: "問題5: 最終問題",
-        // image: 'images/puzzle5.png',
-        puzzle: [
-            {type: 'text', content: '春'},
-            {type: 'text', content: '→'},
-            {type: 'blank', id: 'blank1', correctAnswer: '夏'},
-            {type: 'text', content: '→'},
-            {type: 'blank', id: 'blank2', correctAnswer: '秋'},
-            {type: 'text', content: '→'},
-            {type: 'blank', id: 'blank3', correctAnswer: '冬'}
-        ],
-        choices: [
-            {id: 'choice1', display: '夏', value: '夏', targetBlank: 'blank1'},
-            {id: 'choice2', display: '秋', value: '秋', targetBlank: 'blank2'},
-            {id: 'choice3', display: '冬', value: '冬', targetBlank: 'blank3'},
-            {id: 'choice4', display: '梅雨', value: '梅雨', targetBlank: 'blank1'}
-        ],
-        finalAnswer: ["四季", "しき", "季節", "きせつ"],
-        hint: "日本の季節の移り変わりを表しています"
+        finalAnswer: ["はなぞの", "ハナゾノ", "花園"],
+        hint: "問題画像自体も選択肢の一つです。この問題自体が何かを考えてみましょう。"
     }
 ];
 
@@ -283,6 +251,21 @@ function renderPuzzle() {
         img.style.objectFit = 'contain'; // アスペクト比を保持
         img.style.borderRadius = '10px';
         img.style.display = 'block';
+        img.id = 'puzzle-image';
+
+        // 5問目専用: 問題画像を選択肢として選べるようにする
+        if (currentPuzzle.imageAsChoice) {
+            imageContainer.classList.add('image-as-choice');
+            imageContainer.style.cursor = 'pointer';
+            imageContainer.addEventListener('click', (e) => {
+                // 空欄のクリックは無視
+                if (e.target.classList.contains('puzzle-blank') || e.target.closest('.puzzle-blank')) {
+                    return;
+                }
+                handleImageAsChoiceClick();
+            });
+        }
+
         imageContainer.appendChild(img);
 
         // 空白を座標指定で配置（パーセンテージで指定）
@@ -454,6 +437,14 @@ function handleChoiceClick(choice, btnElement) {
             return;
         }
 
+        // 5問目専用: 画像の選択状態を解除
+        if (currentPuzzle.imageAsChoice) {
+            const imageContainer = document.querySelector('.image-as-choice');
+            if (imageContainer) {
+                imageContainer.classList.remove('image-selected');
+            }
+        }
+
         // 他のボタンの選択を解除
         const allButtons = choicesContainer.querySelectorAll('.choice-btn');
         allButtons.forEach(btn => {
@@ -483,6 +474,40 @@ function handleChoiceClick(choice, btnElement) {
         // ボタンを選択状態に
         btnElement.classList.add('selected');
     }
+}
+
+// 5問目専用: 問題画像を選択肢として選んだ時の処理
+function handleImageAsChoiceClick() {
+    const targetBlank = document.getElementById('blank1');
+    const imageContainer = document.querySelector('.image-as-choice');
+
+    // 既に画像が選択されている場合はキャンセル
+    if (imageContainer && imageContainer.classList.contains('image-selected')) {
+        imageContainer.classList.remove('image-selected');
+        targetBlank.innerHTML = '';
+        targetBlank.classList.remove('filled');
+        delete filledBlanks['blank1'];
+
+        // 他の選択肢ボタンを有効化
+        const allButtons = choicesContainer.querySelectorAll('.choice-btn');
+        allButtons.forEach(btn => btn.classList.remove('selected'));
+        return;
+    }
+
+    // 他の選択肢の選択を解除
+    const allButtons = choicesContainer.querySelectorAll('.choice-btn');
+    allButtons.forEach(btn => btn.classList.remove('selected'));
+
+    // 画像を選択状態に
+    if (imageContainer) {
+        imageContainer.classList.add('image-selected');
+    }
+
+    // 空欄に「なぞ」のテキストを表示
+    targetBlank.innerHTML = '';
+    targetBlank.textContent = 'なぞ';
+    targetBlank.classList.add('filled');
+    filledBlanks['blank1'] = 'なぞ';
 }
 
 // 順番選択モード: 空欄を再配置する
