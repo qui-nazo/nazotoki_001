@@ -253,11 +253,13 @@ function renderPuzzle() {
         img.style.display = 'block';
         img.id = 'puzzle-image';
 
-        // 5問目専用: 問題画像を選択肢として選べるようにする
+        imageContainer.appendChild(img);
+
+        // 5問目専用: 問題画像の枠全体を選択肢として選べるようにする
         if (currentPuzzle.imageAsChoice) {
-            imageContainer.classList.add('image-as-choice');
-            imageContainer.style.cursor = 'pointer';
-            imageContainer.addEventListener('click', (e) => {
+            puzzleDisplay.classList.add('image-as-choice');
+            puzzleDisplay.style.cursor = 'pointer';
+            puzzleDisplay.addEventListener('click', (e) => {
                 // 空欄のクリックは無視
                 if (e.target.classList.contains('puzzle-blank') || e.target.closest('.puzzle-blank')) {
                     return;
@@ -265,8 +267,6 @@ function renderPuzzle() {
                 handleImageAsChoiceClick();
             });
         }
-
-        imageContainer.appendChild(img);
 
         // 空白を座標指定で配置（パーセンテージで指定）
         currentPuzzle.puzzle.forEach(item => {
