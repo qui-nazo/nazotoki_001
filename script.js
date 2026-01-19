@@ -624,6 +624,12 @@ function showFeedback(message, isCorrect) {
 let currentHintIndex = 0;
 
 function showHint() {
+    // ヒントが既に表示されている場合は閉じる
+    if (!hintBox.classList.contains('hidden')) {
+        hintBox.classList.add('hidden');
+        return;
+    }
+
     // ヒントが配列の場合（複数ヒント対応）
     if (Array.isArray(currentPuzzle.hint)) {
         let hintContent = `<h3>💡 ヒント①</h3><p>${currentPuzzle.hint[0]}</p>`;
@@ -631,6 +637,9 @@ function showHint() {
         // まだ次のヒントがある場合は「さらにヒント」ボタンを表示
         if (currentHintIndex === 0 && currentPuzzle.hint.length > 1) {
             hintContent += `<button id="more-hint-btn" class="more-hint-btn">さらにヒント</button>`;
+        } else if (currentHintIndex >= 1) {
+            // 既にヒント②まで見ている場合はそれも表示
+            hintContent += `<h3>💡 ヒント②</h3><p>${currentPuzzle.hint[1]}</p>`;
         }
 
         hintBox.innerHTML = hintContent;
