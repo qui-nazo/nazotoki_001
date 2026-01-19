@@ -241,11 +241,15 @@ main {
     background: #e0e0e0;
 }
 
-.choice-btn.selected {
-    background: #f0f0f0;
-    color: #333;
+.choice-btn.selected,
+.choice-btn.selected:hover,
+.choice-btn.selected:focus,
+.choice-btn.selected:active {
+    background: #f0f0f0 !important;
+    color: #333 !important;
     border-color: #667eea;
     box-shadow: 0 0 0 3px #667eea;
+    outline: none;
 }
 
 .choice-btn.disabled {
