@@ -92,7 +92,7 @@ const puzzles = [
         imageHeight: 500,
         imageAsChoice: true, // 問題画像自体も選択肢として選べる
         puzzle: [
-            {type: 'blank', id: 'blank1', correctAnswer: 'なぞ', x: 150, y: 150, width: 200, height: 200}
+            {type: 'blank', id: 'blank1', correctAnswer: 'なぞ', x: 160, y: 150, width: 200, height: 200}
         ],
         choices: [
             // 問題1の選択肢
