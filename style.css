@@ -248,7 +248,7 @@ main {
     background: #f0f0f0 !important;
     color: #333 !important;
     border-color: #667eea;
-    box-shadow: 0 0 0 3px #667eea;
+    box-shadow: 0 0 0 1px #667eea;
     outline: none;
 }
 
