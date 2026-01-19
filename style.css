@@ -213,7 +213,7 @@ main {
 }
 
 .image-as-choice:hover {
-    box-shadow: 0 0 15px rgba(102, 126, 234, 0.5);
+    background: #e0e0e0;
 }
 
 .image-as-choice.image-selected {
@@ -263,9 +263,7 @@ main {
 }
 
 .choice-btn:hover:not(.disabled) {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 25px rgba(102, 126, 234, 0.3);
-    border-color: #667eea;
+    background: #e0e0e0;
 }
 
 .choice-btn.selected {

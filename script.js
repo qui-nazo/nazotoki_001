@@ -512,9 +512,15 @@ function handleImageAsChoiceClick() {
         imageContainer.classList.add('image-selected');
     }
 
-    // 空欄に「なぞ」のテキストを表示
+    // 空欄に選択画像を表示
     targetBlank.innerHTML = '';
-    targetBlank.textContent = 'なぞ';
+    const img = document.createElement('img');
+    img.src = 'images/Q5_selected.jpg';
+    img.alt = 'なぞ';
+    img.style.maxWidth = '100%';
+    img.style.maxHeight = '100%';
+    img.style.objectFit = 'contain';
+    targetBlank.appendChild(img);
     targetBlank.classList.add('filled');
     filledBlanks['blank1'] = 'なぞ';
 }
