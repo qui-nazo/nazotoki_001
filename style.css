@@ -436,6 +436,28 @@ button {
     margin-bottom: 10px;
 }
 
+.hint-box h3:not(:first-child) {
+    margin-top: 20px;
+}
+
+.more-hint-btn {
+    display: block;
+    margin: 15px auto 0;
+    padding: 10px 20px;
+    background: #ffc107;
+    color: #856404;
+    border: 2px solid #e0a800;
+    border-radius: 8px;
+    font-size: 1em;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.more-hint-btn:hover {
+    background: #e0a800;
+}
+
 .hidden {
     display: none;
 }

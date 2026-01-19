@@ -6,7 +6,7 @@ const ENABLE_PUZZLE_JUMP = true; // true: ジャンプ機能を有効化 / false
 // 謎解きパズルのデータ
 const puzzles = [
     {
-        title: "問題1",
+        title: "ナゾ1",
         image: 'images/Q1.jpg', // 問題画像を表示
         imageWidth: 500, // 画像の表示幅（px）
         imageHeight: 500, // 画像の表示高さ（px）- 正方形に修正
@@ -24,7 +24,7 @@ const puzzles = [
         hint: "たぬきは「た」抜き。答えが4文字になるには、「た」の他にどんな文字がなくなればよいか考えてみよう。"
     },
     {
-        title: "問題2",
+        title: "ナゾ2",
         image: 'images/Q2.jpg',
         imageWidth: 500,
         imageHeight: 500,
@@ -38,10 +38,10 @@ const puzzles = [
             {id: 'choice4', display: '<', value: '<', targetBlank: 'blank1', image: 'images/Q2_shonari.jpg'}
         ],
         finalAnswer: ["すわん", "スワン"],
-        hint: "選んだ記号をカタカナ3文字で読むとどうなるでしょうか？"
+        hint: "あてはめる記号は「＝」ですが、「イコール」とは読みません。"
     },
     {
-        title: "問題3",
+        title: "ナゾ3",
         image: 'images/Q3.jpg',
         imageWidth: 500,
         imageHeight: 500,
@@ -59,10 +59,13 @@ const puzzles = [
             {id: 'choice4', display: 'たこ', value: 'たこ', image: 'images/Q3_tako.png'}
         ],
         finalAnswer: ["しほんか", "シホンカ", "資本家"],
-        hint: "イラストをカタカナで読んでみましょう。そして、それぞれ1文字目だけを順番に読むと..."
+        hint: [
+            "選択肢すべてを順番に並べて、逆さから読むとこたえがわかるようです。",
+            "3, 4には、それぞれ「はえ」「たこ」が入ります。"
+        ]
     },
     {
-        title: "問題4",
+        title: "ナゾ4",
         image: 'images/Q4.jpg',
         imageWidth: 500,
         imageHeight: 500,
@@ -84,7 +87,7 @@ const puzzles = [
         hint: "それぞれの言葉の最初の2文字を順番に読むと..."
     },
     {
-        title: "問題5",
+        title: "ナゾ5",
         image: 'images/Q5.jpg',
         imageWidth: 500,
         imageHeight: 500,
@@ -210,6 +213,7 @@ function loadPuzzle() {
     currentPuzzle = puzzles[currentPuzzleIndex];
     filledBlanks = {};
     selectionOrder = [];
+    currentHintIndex = 0;
 
     questionTitle.textContent = currentPuzzle.title;
     updateProgressCircles();
@@ -617,9 +621,40 @@ function showFeedback(message, isCorrect) {
 }
 
 // ヒントの表示
+let currentHintIndex = 0;
+
 function showHint() {
-    hintBox.innerHTML = `<h3>💡 ヒント</h3><p>${currentPuzzle.hint}</p>`;
-    hintBox.classList.remove('hidden');
+    // ヒントが配列の場合（複数ヒント対応）
+    if (Array.isArray(currentPuzzle.hint)) {
+        let hintContent = `<h3>💡 ヒント①</h3><p>${currentPuzzle.hint[0]}</p>`;
+
+        // まだ次のヒントがある場合は「さらにヒント」ボタンを表示
+        if (currentHintIndex === 0 && currentPuzzle.hint.length > 1) {
+            hintContent += `<button id="more-hint-btn" class="more-hint-btn">さらにヒント</button>`;
+        }
+
+        hintBox.innerHTML = hintContent;
+        hintBox.classList.remove('hidden');
+
+        // 「さらにヒント」ボタンのイベント設定
+        const moreHintBtn = document.getElementById('more-hint-btn');
+        if (moreHintBtn) {
+            moreHintBtn.addEventListener('click', showMoreHint);
+        }
+    } else {
+        // 従来の単一ヒント
+        hintBox.innerHTML = `<h3>💡 ヒント</h3><p>${currentPuzzle.hint}</p>`;
+        hintBox.classList.remove('hidden');
+    }
+}
+
+function showMoreHint() {
+    if (Array.isArray(currentPuzzle.hint) && currentPuzzle.hint.length > 1) {
+        currentHintIndex = 1;
+        let hintContent = `<h3>💡 ヒント①</h3><p>${currentPuzzle.hint[0]}</p>`;
+        hintContent += `<h3>💡 ヒント②</h3><p>${currentPuzzle.hint[1]}</p>`;
+        hintBox.innerHTML = hintContent;
+    }
 }
 
 // 完了画面の表示
