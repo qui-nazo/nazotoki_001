@@ -15,11 +15,11 @@
             </div>
             <!-- テスト用: 問題ジャンプ機能 -->
             <div id="puzzle-jump" class="puzzle-jump hidden">
-                <button class="jump-btn" data-puzzle="0">問題1</button>
-                <button class="jump-btn" data-puzzle="1">問題2</button>
-                <button class="jump-btn" data-puzzle="2">問題3</button>
-                <button class="jump-btn" data-puzzle="3">問題4</button>
-                <button class="jump-btn" data-puzzle="4">問題5</button>
+                <button class="jump-btn" data-puzzle="0">ナゾ1</button>
+                <button class="jump-btn" data-puzzle="1">ナゾ2</button>
+                <button class="jump-btn" data-puzzle="2">ナゾ3</button>
+                <button class="jump-btn" data-puzzle="3">ナゾ4</button>
+                <button class="jump-btn" data-puzzle="4">ナゾ5</button>
             </div>
         </header>
 
@@ -27,11 +27,11 @@
             <h2>穴埋めナゾトキへようこそ！</h2>
             <div class="instruction-box">
                 <h3>遊び方：</h3>
-                <p>これから出題される謎解きは、一部が欠落した不完全な問題になっています。</p>
-                <p>まずは、欠けた部分にどのイラストが入れば問題が成立するかを考え、ボタンを押して選択してください。</p>
-                <p>問題が完成したら、実際にその答えを導いて入力しましょう。</p>
-                <p>問題の内容と答えの両方があっていたら、正解となり次の問題に進むことができます。</p>
-                <p>問題は全部で<span id="total-puzzles-start">5</span>問で、順番にすべて正解するとゲームクリアとなります。</p>
+                <p>これから出題されるナゾは、一部が欠落した不完全なナゾになっています。</p>
+                <p>まずは、欠けた部分にどのイラストや文字が入ればナゾが成立するかを考え、ボタンを押して選択してください。</p>
+                <p>ナゾが完成したら、実際にその答えを導いて入力しましょう。なお、答えはすべて一般的な単語になります。</p>
+                <p>ナゾの内容と答えの両方があっていたら「正解」となります。</p>
+                <p>ナゾは全部で<span id="total-puzzles-start">5</span>問で、順番にすべて正解するとゲームクリアとなります。</p>
                 <p class="good-luck">それでは、頑張ってください！</p>
             </div>
             <button id="start-btn" class="start-btn">開始</button>
@@ -40,7 +40,7 @@
         <main id="game-screen" class="hidden">
             <div class="puzzle-container">
                 <div class="puzzle-question">
-                    <h2 id="question-title">問題を読み込み中...</h2>
+                    <h2 id="question-title">ナゾを読み込み中...</h2>
 
                     <!-- 謎解きの問題表示エリア（欠落部分を含む） -->
                     <div id="puzzle-display" class="puzzle-display"></div>
@@ -71,10 +71,14 @@
             <p>すべての謎を解きました！</p>
             <p>クリア時間: <span id="clear-time"></span></p>
             <button id="restart-btn">もう一度挑戦</button>
+            <div class="clear-buttons">
+                <button id="x-post-btn" class="x-post-btn">Xにポスト</button>
+                <button id="extra-btn" class="extra-btn" disabled>エクストラ問題に挑戦(準備中)</button>
+            </div>
         </div>
 
         <footer>
-            <p>&copy; 2026 謎解きパズルゲーム</p>
+            <p>&copy; 2026 穴埋めナゾトキ</p>
         </footer>
     </div>
 

@@ -20,7 +20,7 @@ const puzzles = [
             {id: 'choice3', display: '電車', value: '電車', targetBlank: 'blank1', image: 'images/Q1_densha.png'},
             {id: 'choice4', display: 'ピアノ', value: 'ピアノ', targetBlank: 'blank1', image: 'images/Q1_piano.png'}
         ],
-        finalAnswer: ["はじまり"],
+        finalAnswer: ["はじまり", "ハジマリ", "始まり"],
         hint: "たぬきは「た」抜き。答えが4文字になるには、「た」の他にどんな文字がなくなればよいか考えてみよう。"
     },
     {
@@ -60,7 +60,7 @@ const puzzles = [
         ],
         finalAnswer: ["しほんか", "シホンカ", "資本家"],
         hint: [
-            "選択肢すべてを順番に並べて、逆さから読むとこたえがわかるようです。",
+            "選択肢すべてを正しい順番に並べて、逆さから読むとこたえがわかるようです。",
             "3, 4には、それぞれ「はえ」「たこ」が入ります。"
         ]
     },
@@ -77,14 +77,18 @@ const puzzles = [
             {type: 'blank', id: 'blank3', correctAnswer: 'あきらめる', label: '3', x: 190, y: 409, width: 210, height: 65}
         ],
         choices: [
-            {id: 'choice1', display: 'インディゴ', value: 'インディゴ'},
+            {id: 'choice1', display: 'インディー', value: 'インディー'},
             {id: 'choice2', display: 'しんかろん', value: 'しんかろん'},
             {id: 'choice3', display: 'コンサート', value: 'コンサート'},
             {id: 'choice4', display: 'さらやしき', value: 'さらやしき'}
         ],
         extraChoice: {id: 'choice5', display: 'あきらめる', value: 'あきらめる'},
         finalAnswer: ["きゃらめる", "キャラメル"],
-        hint: "それぞれの言葉の最初の2文字を順番に読むと..."
+        hint: [
+            "書かれている文字に続けて、5文字の単語の「黒丸の場所」だけ読むナゾのようです。",
+            "「キャ」に続く選択肢がわからない場合は、少し視野を広げて考えてみましょう。",
+            "どうしても見つからない場合は、リタイアしてしまったほうが良いかもしれません。"
+        ]
     },
     {
         title: "ナゾ5",
@@ -113,7 +117,10 @@ const puzzles = [
             {id: 'choice12', display: 'たこ', value: 'たこ', targetBlank: 'blank1', image: 'images/Q3_tako.png'}
         ],
         finalAnswer: ["はなぞの", "ハナゾノ", "花園"],
-        hint: "問題画像自体も選択肢の一つです。この問題自体が何かを考えてみましょう。"
+        hint: [
+            "答えは4文字の一般的な単語になります。\nヒントは以上です。頑張ってください！"
+
+        ]
     }
 ];
 
@@ -685,11 +692,25 @@ function restart() {
     init();
 }
 
+// Xにポストする
+const xPostBtn = document.getElementById('x-post-btn');
+
+function postToX() {
+    const text = `⬜⬛CLEAR⬛⬜
+穴埋めナゾトキをクリアした！えらい！
+
+#穴埋めナゾトキ #謎解き`;
+    const url = 'https://qui-nazo.github.io/nazotoki_001/';
+    const tweetUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}&url=${encodeURIComponent(url)}`;
+    window.open(tweetUrl, '_blank');
+}
+
 // イベントリスナーの設定
 startBtn.addEventListener('click', startGame);
 submitBtn.addEventListener('click', checkFinalAnswer);
 hintBtn.addEventListener('click', showHint);
 restartBtn.addEventListener('click', restart);
+xPostBtn.addEventListener('click', postToX);
 
 answerInput.addEventListener('keypress', (e) => {
     if (e.key === 'Enter') {

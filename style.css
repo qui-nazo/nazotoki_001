@@ -548,6 +548,43 @@ button {
     box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
 }
 
+.clear-buttons {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    margin-top: 20px;
+    flex-wrap: wrap;
+}
+
+.x-post-btn {
+    background: #000000;
+    color: white;
+    padding: 12px 24px;
+    font-size: 1em;
+    font-weight: bold;
+}
+
+.x-post-btn:hover {
+    background: #333333;
+}
+
+.extra-btn {
+    background: #6c757d;
+    color: white;
+    padding: 12px 24px;
+    font-size: 1em;
+    font-weight: bold;
+}
+
+.extra-btn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.extra-btn:hover:not(:disabled) {
+    background: #5a6268;
+}
+
 footer {
     background: #f8f9fa;
     text-align: center;
