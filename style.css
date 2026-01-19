@@ -72,31 +72,6 @@ header h1 {
     border-color: rgba(255, 255, 255, 0.8);
 }
 
-/* テスト用: 問題ジャンプ機能 */
-.puzzle-jump {
-    display: flex;
-    gap: 10px;
-    justify-content: center;
-    margin-top: 15px;
-    flex-wrap: wrap;
-}
-
-.jump-btn {
-    background: rgba(255, 255, 255, 0.3);
-    color: white;
-    border: 2px solid rgba(255, 255, 255, 0.5);
-    padding: 8px 16px;
-    font-size: 0.9em;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: all 0.3s;
-}
-
-.jump-btn:hover {
-    background: rgba(255, 255, 255, 0.5);
-    transform: translateY(-2px);
-}
-
 main {
     padding: 20px;
 }
@@ -535,17 +510,6 @@ button {
     font-size: 1.3em;
     color: #555;
     margin-bottom: 15px;
-}
-
-#restart-btn {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    color: white;
-    margin-top: 20px;
-}
-
-#restart-btn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
 }
 
 .clear-buttons {

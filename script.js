@@ -1,8 +1,3 @@
-// ============================================
-// テスト用設定: 問題ジャンプ機能のオンオフ
-// ============================================
-const ENABLE_PUZZLE_JUMP = true; // true: ジャンプ機能を有効化 / false: 無効化
-
 // 謎解きパズルのデータ
 const puzzles = [
     {
@@ -150,8 +145,6 @@ const progressCircles = document.getElementById('progress-circles');
 const gameScreen = document.getElementById('game-screen');
 const completeScreen = document.getElementById('complete-screen');
 const clearTimeSpan = document.getElementById('clear-time');
-const restartBtn = document.getElementById('restart-btn');
-const puzzleJump = document.getElementById('puzzle-jump');
 
 // プログレスサークルの作成
 function createProgressCircles() {
@@ -186,13 +179,6 @@ function init() {
     startScreen.classList.remove('hidden');
     gameScreen.classList.add('hidden');
     completeScreen.classList.add('hidden');
-
-    // テスト用: ジャンプ機能の表示制御
-    if (ENABLE_PUZZLE_JUMP) {
-        puzzleJump.classList.add('hidden'); // 初期状態では非表示
-    } else {
-        puzzleJump.classList.add('hidden');
-    }
 }
 
 // ゲーム開始
@@ -201,12 +187,6 @@ function startGame() {
     currentPuzzleIndex = 0;
     startScreen.classList.add('hidden');
     gameScreen.classList.remove('hidden');
-
-    // テスト用: ジャンプ機能の表示
-    if (ENABLE_PUZZLE_JUMP) {
-        puzzleJump.classList.remove('hidden');
-    }
-
     loadPuzzle();
 }
 
@@ -685,13 +665,6 @@ function showComplete() {
     completeScreen.classList.remove('hidden');
 }
 
-// ゲームのリスタート
-function restart() {
-    gameScreen.classList.remove('hidden');
-    completeScreen.classList.add('hidden');
-    init();
-}
-
 // Xにポストする
 const xPostBtn = document.getElementById('x-post-btn');
 
@@ -699,7 +672,8 @@ function postToX() {
     const text = `⬜⬛CLEAR⬛⬜
 穴埋めナゾトキをクリアした！えらい！
 
-#穴埋めナゾトキ #謎解き`;
+#穴埋めナゾトキ #謎解き
+`;
     const url = 'https://qui-nazo.github.io/nazotoki_001/';
     const tweetUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}&url=${encodeURIComponent(url)}`;
     window.open(tweetUrl, '_blank');
@@ -709,7 +683,6 @@ function postToX() {
 startBtn.addEventListener('click', startGame);
 submitBtn.addEventListener('click', checkFinalAnswer);
 hintBtn.addEventListener('click', showHint);
-restartBtn.addEventListener('click', restart);
 xPostBtn.addEventListener('click', postToX);
 
 answerInput.addEventListener('keypress', (e) => {
@@ -717,20 +690,6 @@ answerInput.addEventListener('keypress', (e) => {
         checkFinalAnswer();
     }
 });
-
-// テスト用: 問題ジャンプ機能のイベントリスナー
-if (ENABLE_PUZZLE_JUMP) {
-    const jumpButtons = document.querySelectorAll('.jump-btn');
-    jumpButtons.forEach(btn => {
-        btn.addEventListener('click', () => {
-            const puzzleIndex = parseInt(btn.dataset.puzzle);
-            if (puzzleIndex >= 0 && puzzleIndex < puzzles.length) {
-                currentPuzzleIndex = puzzleIndex;
-                loadPuzzle();
-            }
-        });
-    });
-}
 
 // ゲーム開始（開始画面を表示）
 init();
