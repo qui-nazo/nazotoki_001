@@ -345,6 +345,10 @@ function renderChoices() {
         if (currentPuzzleIndex === 3) {
             btn.classList.add('compact');
         }
+        // 5問目の場合はsmallクラスを追加
+        if (currentPuzzleIndex === 4) {
+            btn.classList.add('small');
+        }
         btn.dataset.choiceId = choice.id;
         btn.dataset.value = choice.value;
         btn.dataset.targetBlank = choice.targetBlank;
@@ -354,8 +358,14 @@ function renderChoices() {
             const img = document.createElement('img');
             img.src = choice.image;
             img.alt = choice.display;
-            img.style.maxWidth = '80px';
-            img.style.maxHeight = '80px';
+            // 5問目は画像を小さく
+            if (currentPuzzleIndex === 4) {
+                img.style.maxWidth = '50px';
+                img.style.maxHeight = '50px';
+            } else {
+                img.style.maxWidth = '80px';
+                img.style.maxHeight = '80px';
+            }
             btn.appendChild(img);
         } else {
             const display = document.createElement('div');
